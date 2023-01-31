@@ -16,7 +16,7 @@ class productDao{
         return await productModel.create(data)
     }
 
-    async update(id)
+    async update(id,data)
     {
         return await productModel.findByIdAndUpdate(id,data,{new:true})
     }

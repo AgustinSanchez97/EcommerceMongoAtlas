@@ -15,5 +15,12 @@ router.get("/edit/:id", async (req,res) =>
     res.render("edit", {title:"Edit",product} )
 })
 
+router.get("/delete/:id", async (req,res) =>
+{
+    const product = await productsDao.delete(req.params.id)
+    res.redirect("/")
+    res.render("delete", {title:"Delete",product} )
+})
+
 
 export default router
