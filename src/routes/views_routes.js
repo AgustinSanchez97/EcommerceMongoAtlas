@@ -1,12 +1,21 @@
 import { Router } from "express";
 import productsDao from "../daos/dbManager/products.dao.js";
 
+
 const router = Router()
 
 router.get("/", async (req,res) =>
 {
-    const products = await productsDao.getAll()
-    res.render("index",{title: "home", products})
+    //let products = await productsDao.getAll()
+    //res.render("index",{title: "home", products})
+    const {page,limit}= req.query
+    let products = await productsDao.getAllByPages(page||1,limit||2)
+    console.log(products)
+    res.render("index",{
+        title:"Products",
+        products
+    })
+    
 })
 
 router.get("/edit/:id", async (req,res) =>

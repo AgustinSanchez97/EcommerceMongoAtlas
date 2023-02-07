@@ -8,6 +8,8 @@ import Handlebars from "handlebars";
 import {allowInsecurePrototypeAccess} from "@handlebars/allow-prototype-access"
 
 
+
+
 const app = express();
 
 mongoose.set("strictQuery",true)
@@ -22,6 +24,8 @@ mongoose.connect("mongodb+srv://coder:coder123@coderhousehosting.xowlbyk.mongodb
         console.log("Conectado a MongoDB")
     }
 })
+
+
 
 
 app.engine("hbs", handlebars.engine(

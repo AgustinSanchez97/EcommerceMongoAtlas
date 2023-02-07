@@ -2,8 +2,14 @@ import { productModel } from "../../models/productModel.js";
 
 class productDao{
     async getAll()
+    {        
+        products = await productModel.find()
+        return products
+    }
+    async getAllByPages(page,limits)
     {
-        return await productModel.find()
+        let products = await productModel.paginate({},{page:page, limit:limits})
+        return products
     }
 
     async getById(id)
@@ -27,5 +33,6 @@ class productDao{
     }
 
 }
+//productDao.plugin(mongoosePaginate)
 
 export default new productDao()

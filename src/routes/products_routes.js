@@ -8,7 +8,13 @@ router.get('/', async (req, res) =>
 {
     try 
     {
-        const products = await productsDao.getAll();res.json(products);
+        let products = await productsDao.getAll()        
+        /*res.render("index",{
+        title:"Products",
+        products
+    })*/
+        //const products = await productsDao.getAll();
+        res.json(products);
     }     
     catch (error)
     {

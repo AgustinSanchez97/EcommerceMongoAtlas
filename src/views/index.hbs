@@ -15,7 +15,7 @@
                 </tr>
             </thead>
             <tbody>
-            {{#each products}}
+            {{#each products.docs}}
             <tr>
                 <td>{{this.id}} </td>
                 <td>{{this.title}}</td>
@@ -32,6 +32,13 @@
 
         </table>
     </div>
+    <div class="">
+        <a href="/?page={{products.prevPage}}&&limit={{products.limit}}">Prev</a>
+        <a href="/?page={{products.nextPage}}&&limit={{products.limit}}">Next</a>
+        <h5>{{products.page}}/ {{products.totalPages}}</h5>
+
+    </div>
+
     <hr>
     <div>
         <form class="row p-3" action="/api/products" method="POST">

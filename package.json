@@ -1,7 +1,6 @@
 {
   "name": "coderhousebackend_integracionmongodb",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "type": "module",
   "scripts": {
@@ -16,6 +15,16 @@
     "express": "^4.18.2",
     "express-handlebars": "^6.0.7",
     "handlebars": "^4.7.7",
-    "mongoose": "^6.9.0"
-  }
+    "mongoose": "^6.9.1",
+    "mongoose-paginate-v2": "^1.7.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AgustinSanchez97/EcommerceMongoAtlas.git"
+  },
+  "bugs": {
+    "url": "https://github.com/AgustinSanchez97/EcommerceMongoAtlas/issues"
+  },
+  "homepage": "https://github.com/AgustinSanchez97/EcommerceMongoAtlas#readme",
+  "description": ""
 }
