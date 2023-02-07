@@ -1,0 +1,38 @@
+<div>
+
+    <table class="table">
+            <thead class="table-dark">
+                <tr>
+                    <th>#</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Price</th>            
+                </tr>
+            </thead>
+            <tbody>
+            
+                <tr>
+                    <td >{{product.id}} </td>
+                    <td>{{product.title}}</td>
+                    <td>{{product.description}}</td>
+                    <td>{{product.price}}</td>
+                    
+                </tr>
+            
+            </tbody>
+
+        </table>
+        <div>
+            <input id="productId" type="hidden" value="{{product.id}}">
+            <h5>Select the cart to add the product</h5>
+            <select name="cart" id="listOfCarts">
+                    <option value="Select a cart">Select a cart</option>
+                {{#each carts}}
+                    <option value="{{this.id}}">{{this.id}}</option>
+                {{/each}} 
+            </select>
+            {{!-- <input type="submit" value="Add" class="btn btn-primary" id="add"> --}}
+        </div>
+        
+    </div>
+<script src="/js/add.js"></script>

@@ -6,26 +6,18 @@
         <table class="table">
             <thead class="table-dark">
                 <tr>
-                    <th>#</th>
-                    <th>Title</th>
-                    <th>Description</th>
-                    <th>Price</th>
-                    <th>Stock</th>
+                    <th>#</th>        
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
-            {{#each products.docs}}
+            {{#each carts}}
             <tr>
                 <td>{{this.id}} </td>
-                <td>{{this.title}}</td>
-                <td>{{this.description}}</td>
-                <td>{{this.price}}</td>
-                <td>{{this.stock}}</td>
+
                 <td>
                     <a href="/edit/{{this.id}}" class="btn btn-success">Edit</a>
                     <a href="/delete/{{this.id}}" class="btn btn-danger">Delete</a>
-                    <a href="/add/{{this.id}}" class="btn btn-warning">Add</a>
                 </td>
             </tr>
             {{/each}}
@@ -34,22 +26,14 @@
         </table>
     </div>
     <div class="">
-        <a href="/?page={{products.prevPage}}&&limit={{products.limit}}">Prev</a>
-        <a href="/?page={{products.nextPage}}&&limit={{products.limit}}">Next</a>
-        <h5>{{products.page}}/ {{products.totalPages}}</h5>
-
+        <a href="/carts/?page={{carts.prevPage}}&&limit={{carts.limit}}">Prev</a>
+        <a href="/carts/?page={{carts.nextPage}}&&limit={{carts.limit}}">Next</a>
+        <h5>{{carts.page}}/ {{carts.totalPages}}</h5>
     </div>
-    <hr>
 
+    <hr>
     <div>
         <form class="row p-3" action="/api/carts" method="POST">
-            <input type="submit" value="CREAR NUEVO CARRO" class="btn btn-success">
-        </form>
-    </div>
-
-    <hr>
-    <div>
-        <form class="row p-3" action="/api/products" method="POST">
             <input class="form-control m-1" type="text" name="title" placeholder="title...">
             <input class="form-control m-1" type="text" name="description" placeholder="description...">
             <input class="form-control m-1" type="number" name="price" placeholder="price...">
@@ -57,7 +41,6 @@
             <input type="submit" value="Send" class="btn btn-primary"> 
         </form>
     </div>
-    
 </div>
 
 

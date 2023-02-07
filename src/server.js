@@ -3,6 +3,7 @@ import handlebars from "express-handlebars"
 import __dirname from "./utils.js"
 import productsRouter from "./routes/products_routes.js"
 import viewsRouter from "./routes/views_routes.js"
+import cartsRouter from "./routes/carts_routes.js"
 import mongoose from "mongoose";
 import Handlebars from "handlebars";
 import {allowInsecurePrototypeAccess} from "@handlebars/allow-prototype-access"
@@ -46,26 +47,12 @@ app.use(express.urlencoded({extended: true}))
 //Routers
 app.use("/api/products", productsRouter)
 app.use("/",viewsRouter)
+app.use("/api/carts",cartsRouter)
 
 
 app.listen(8080,() => {console.log("Escuchando en el puerto 8080")})
 
 
-let products = []
 
 
 
-//funciones
-function arrayArrange(array, idToStart)
-{
-    idToStart = parseInt(idToStart)
-    let productsReorderList = array.filter(product => product.id > idToStart)
-    array.splice(idToStart)
-    
-    for (let i = 0; i < productsReorderList.length; i++) 
-    {
-        productsReorderList[i].id = idToStart + i
-        array.push(productsReorderList[i])
-    }        
-}
-    
