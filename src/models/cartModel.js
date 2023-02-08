@@ -1,4 +1,4 @@
-import { Schema, model } from "mongoose";
+import { Schema, model, SchemaType } from "mongoose";
 //import mongoosePaginate from "mongoose-paginate-v2"
 
 
@@ -8,9 +8,10 @@ const cartsCollection = "carts"
 const cartSchema = new Schema({    
     products: {
         type:[
-            {
-                product: {type: Schema.Types.ObjectId, ref:"products"}
-            }
+            /*{
+                 productId: {type: String, required: true},
+                 quantity: {type: Number, required: true},
+            }*/
         ],
         default: []
     },    

@@ -5,19 +5,27 @@ const router = Router()
 
 //crear carrito vacio
 router.post("/" , async (req,res) => {
-    
-
-
+    try 
+    {
+        const cart = await cartsDao.create()
+        res.redirect("/api/carts/")        
+    }catch (error)
+    {
+        res.status(500).json({ error: error.message });
+    }
 })
 //actualizar carro
 router.put("/:id", async (req,res) => {
     
     try 
     {
-        await console.log( await cartsDao.getById(req.params.id))
+        //await console.log( await req.params.id)
         const cart = await cartsDao.update(req.params.id, req.body)
-        
+        res.json(req.body)
+        /*
+        const cart = await cartsDao.update(req.params.id, req.body)
         res.json(cart)
+        */
     } 
     catch (error) 
     {
@@ -40,9 +48,16 @@ router.delete("/:cid/products/:pid" ,async (req,res) => {
 })
 
 //borrar carrito especifico
-router.delete("/:cid ",async (req,res) => {
-
-
+router.delete("/:id",async (req,res) => {
+    try 
+    {                
+        const cart = await cartsDao.delete(req.params.id)
+        res.json(cart)
+    } 
+    catch (error) 
+    {
+        res.status(500).json({ error: error.message })
+    }
 })
 
 

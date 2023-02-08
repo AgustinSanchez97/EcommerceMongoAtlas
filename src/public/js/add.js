@@ -1,15 +1,39 @@
 
-const cartAddEvent = document.querySelector("#listOfCarts")
+const selectCardId = document.querySelector("#listOfCarts")
 const productId = document.querySelector("#productId").value
 
+const productQuantity = document.querySelector("#productQuantity")
 
-cartAddEvent.addEventListener("change",(event)=>{
+const sendEvent = document.querySelector("#send")
+
+selectCardId.addEventListener("change",(event)=>
+{
     event.preventDefault()
-    const cartId = cartAddEvent.value
-    const data ={
-        productId
-    }
-    console.log(data)
+    //productQuantity.value =
+
+})
+
+
+
+sendEvent.addEventListener("click",(event)=>{
+    
+    event.preventDefault()
+    //console.log(selectCardId.value == "",productQuantity.value == "")
+    if(selectCardId.value == "" || productQuantity.value == "") return
+
+    
+    const cartId = selectCardId.value
+
+    const data = {    
+        products: {
+            product:[
+                
+                    productId,
+                    quantity= productQuantity.value
+                
+            ],            
+        },    
+    }    
 
     fetch(`/api/carts/${cartId}`,{
         method: "PUT",
@@ -19,8 +43,9 @@ cartAddEvent.addEventListener("change",(event)=>{
         body: JSON.stringify(data)
     })
     .then(res => res.json())
+    .then(res => console.log(res))
     .then(data => {
-        //window.location.href = "/"
+        //window.location.href = "/api/carts/"
     })
 })
 

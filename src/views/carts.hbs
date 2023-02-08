@@ -13,11 +13,13 @@
             <tbody>
             {{#each carts}}
             <tr>
-                <td>{{this.id}} </td>
+                <td>Cart #{{this.id}} </td>
 
                 <td>
                     <a href="/edit/{{this.id}}" class="btn btn-success">Edit</a>
-                    <a href="/delete/{{this.id}}" class="btn btn-danger">Delete</a>
+                    {{!-- <a href="/api/carts/deleteCart/{{this.id}}" class="btn btn-danger">Delete</a> --}}                                        
+                    <button class="deleteCart btn btn-danger" id="{{this.id}}" data-id="{{@index}}">Delete</button>
+
                 </td>
             </tr>
             {{/each}}
@@ -25,22 +27,19 @@
 
         </table>
     </div>
-    <div class="">
+    {{!-- <div class="">
         <a href="/carts/?page={{carts.prevPage}}&&limit={{carts.limit}}">Prev</a>
         <a href="/carts/?page={{carts.nextPage}}&&limit={{carts.limit}}">Next</a>
         <h5>{{carts.page}}/ {{carts.totalPages}}</h5>
-    </div>
+    </div> --}}
 
     <hr>
     <div>
-        <form class="row p-3" action="/api/carts" method="POST">
-            <input class="form-control m-1" type="text" name="title" placeholder="title...">
-            <input class="form-control m-1" type="text" name="description" placeholder="description...">
-            <input class="form-control m-1" type="number" name="price" placeholder="price...">
-            <input class="form-control m-1" type="number" name="stock" placeholder="stock...">
-            <input type="submit" value="Send" class="btn btn-primary"> 
+        <form class="row p-3" action="/api/carts" method="POST">            
+            <input type="submit" value="CREAR NUEVO CARRO" class="btn btn-success">
         </form>
     </div>
 </div>
 
+<script src="/js/carts.js"></script>
 
