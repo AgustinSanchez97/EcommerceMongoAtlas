@@ -1,5 +1,6 @@
 import { cartModel } from "../../models/cartModel.js";
-//import { productModel } from "../../models/productModel";
+import productsDao from "./products.dao.js";
+
 
 
 class cartDao{
@@ -33,6 +34,11 @@ class cartDao{
     async delete(id)
     {
         return await cartModel.findByIdAndDelete(id)
+    }
+
+    async addProductToCart(cartId,productId,data)
+    {
+        
     }
 
 }

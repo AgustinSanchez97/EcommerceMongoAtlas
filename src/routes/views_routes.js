@@ -29,19 +29,70 @@ router.get("/add/:id", async (req,res) =>
     const product = await productsDao.getById(req.params.id)
     let cartsProducts = []
     //console.log(allCarts)
+    //console.log(product.id)
+    let cartWithProductWanted
 
     for (let index = 0; index < allCarts.length; index++) {
         //await console.log(await cartDao.getById(allCarts[index].id))
         const cart = await cartDao.getById(allCarts[index].id)
+        //console.log(allCarts[index].id)
         //console.log(cart?.products[index]?.product)
-        for (let j = 0; j < cart?.products[index]?.product.length; j++) {
-            const cartproducts = cart?.products[j]?.product[j]
-            console.log(cartproducts)
+        //console.log(cart?.products)
+        //console.log("index 1:"+index)
+        //console.log(cart?.products.length)
+        if(cart?.products.length == 0)
+        {
+            //console.log(cart?.products)
+            const _product = 
+            {
+                cartId:cart.id,
+                productID:product.id,
+                quantity:"0"
+            }
+            cartsProducts.push(_product)
+
+        }        
+        for (let j = 0; j < cart?.products?.length; j++) {
+            //console.log("index 2:"+j)
+
+            const cartproducts = cart?.products[j]?.product[0]
+            const cartproducts2 = cart?.products[j]?.product[1]
+            //console.log(cart.id,cartproducts,cartproducts2)
+            if(cartproducts != product.id) 
+            {/*
+                const _product = 
+            {
+                cartId:cart.id,
+                productID:product.id,
+                quantity:"0"
+            }
+            cartsProducts.push(_product)*/
+            }
+            else
+            {
+                const _product =
+                {
+                    cartId:cart.id,
+                    productID:cartproducts,
+                    quantity:cartproducts2
+                }
+                cartsProducts.push(_product)
+                //console.log(_product)
+            }
+            
+
+            
+
+            //console.log(cart?.products.find((productId)=>{ productId == product.id} ))
+            
+            //console.log(cartproducts,cartproducts2)
             
         }
         //cartsProducts.push(cart.products)
-
+        
     }
+    //console.log(cartsProducts)
+
     //console.log(cartsProducts)
 
     // allCarts.forEach(cart => {

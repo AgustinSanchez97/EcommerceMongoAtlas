@@ -24,16 +24,18 @@ sendEvent.addEventListener("click",(event)=>{
     
     const cartId = selectCardId.value
 
-    const data = {    
-        products: {
-            product:[
-                
-                    productId,
-                    quantity= productQuantity.value
-                
-            ],            
-        },    
+    const data = {
+        _productId:productId,
+        product:[               
+            quantity= productQuantity.value
+        ],
     }    
+    /*
+    product:[                
+                    _productId= productId,
+                    quantity= productQuantity.value
+            ],
+    */
 
     fetch(`/api/carts/${cartId}`,{
         method: "PUT",

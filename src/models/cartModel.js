@@ -6,16 +6,25 @@ const cartsCollection = "carts"
 
 
 const cartSchema = new Schema({    
+    products: [
+        
+    ]    
+})
+/*
+
+const cartSchema = new Schema({    
     products: {
         type:[
-            /*{
-                 productId: {type: String, required: true},
-                 quantity: {type: Number, required: true},
-            }*/
+            {
+                 //productId: {type: String, required: true},
+                 //quantity: {type: Number, required: true},
+            }
         ],
         default: []
     },    
 })
+
+*/
 
 //productSchema.plugin(mongoosePaginate)
 
