@@ -1,5 +1,6 @@
 import cartsDao from "../daos/dbManager/carts.dao.js"
-import { Router } from 'express'
+import productsDao from "../daos/dbManager/products.dao.js";
+import { json, Router } from 'express'
 const router = Router()
 
 
@@ -32,8 +33,10 @@ router.put("/:id", async (req,res) => {
         let productInCart = allProductsInCart.products.find(product => product._productId == req.body._productId)
 
         let index = allProductsInCart.products.findIndex(product => product._productId == req.body._productId);
-        
 
+        const productToAdd = await productsDao.getById(req.body._productId)            
+        
+        if(productToAdd.stock <= req.body.product) return
         if(productInCart == null)
         {
             allProductsInCart.products.push(req.body)
@@ -41,7 +44,7 @@ router.put("/:id", async (req,res) => {
         else
         {
             //console.log(allProductsInCart.products[index])
-            //console.log(req.body)
+            
             allProductsInCart.products[index]=req.body
         }
         //console.log(req.body._productId)
@@ -63,10 +66,9 @@ router.put("/:id", async (req,res) => {
         //await console.log( allProductsInCart.products.find(()=>{ req.body[0]}))
         
         //allProductsInCart.products.push(req.body)
-        const cart = await cartsDao.update(req.params.id, allProductsInCart)
-        /*
-        console.log(cart)
+        const cart = await cartsDao.update(req.params.id, allProductsInCart)        
         res.json(cart)
+        /*
         */
         /*
         const cart = await cartsDao.update(req.params.id, req.body)

@@ -105,7 +105,13 @@ router.get("/add/:id", async (req,res) =>
     // });
     res.render("add", {title:"AddProduct",product,carts,} )
 })
-
+router.get("/editCart/:id", async (req,res) =>
+{
+    const cart = await cartDao.getById(req.params.id)
+    console.log(cart.products)
+    const productsData = cart.products
+    res.render("editCart", {title:"EditCart",cart,productsData} )
+})
 
 router.get("/edit/:id", async (req,res) =>
 {
