@@ -9,12 +9,29 @@ router.get("/", async (req,res) =>
 {
     //let products = await productsDao.getAll()
     //res.render("index",{title: "home", products})
-    const {page,limit}= req.query
-    let products = await productsDao.getAllByPages(page||1,limit||4)
-    //console.log(products)
+    const {page,limit,category}= req.query
+    let products = await productsDao.getAllByPages(category,page||1,limit||4)
+    
+    
+    
+    let allProducts = await productsDao.getAll()
+
+    let allCategories = []
+    allProducts.forEach(product => {
+        if(allCategories.find(category => category == product.category) != null||allCategories.find(category => category == product.category) != undefined) return
+
+        allCategories.push(product.category)
+    });
+    allCategories.push("todos")
+
+    console.log(allCategories)
+
+    let actualCategory
+    if(category!=undefined) actualCategory = category||"todos"
+    
     res.render("index",{
         title:"Products",
-        products,
+        products,allCategories,actualCategory
     })
     
 })

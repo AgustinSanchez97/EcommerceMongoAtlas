@@ -1,6 +1,11 @@
 
 const sendEvent = document.querySelector("#send")
 
+
+
+
+
+
 sendEvent.addEventListener("click",(event)=>{
     event.preventDefault()
     const id = document.querySelector("#id").value
@@ -8,6 +13,7 @@ sendEvent.addEventListener("click",(event)=>{
     
         title : document.querySelector("#title").value,
         description : document.querySelector("#description").value,
+        category : document.querySelector("#category").value,
         price : document.querySelector("#price").value,
         stock : document.querySelector("#stock").value,
     }

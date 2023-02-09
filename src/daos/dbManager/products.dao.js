@@ -1,14 +1,38 @@
 import { productModel } from "../../models/productModel.js";
 
+
 class productDao{
     async getAll()
     {        
-        products = await productModel.find()
+        const products = await productModel.find()
         return products
     }
-    async getAllByPages(page,limits)
+    async getAllByPages(sortMethod,page,limits,orderMethod)
     {
-        let products = await productModel.paginate({},{page:page, limit:limits})
+        let options =
+        {                        
+            page:page,
+            limit:limits,
+            sort:{},
+        }
+
+        options.sort={price:1}
+        
+        let filters = {}
+
+        if(sortMethod != null && sortMethod != "todos")
+        {
+            filters.category = sortMethod
+        }
+        
+        //console.log(result)
+        //let products = await productModel.find()
+        let products = await productModel.paginate(productModel.find(filters),options)
+        
+        //let products = await productModel.find({description:"telefono"})
+        
+        //console.log(await productModel.find({description:"telefono"}))
+        //let products = await productModel.paginate({},{page:page, limit:limits})
         return products
     }
 
