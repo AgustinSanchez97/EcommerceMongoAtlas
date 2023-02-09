@@ -1,7 +1,7 @@
 
 const deleteEvent = document.querySelectorAll(".deleteCart")
 
-deleteEvent.forEach((cart) => {        
+deleteEvent.forEach((cart) => {
     cart.addEventListener("click", (eventData)=>{
     eventData.preventDefault();
     const cartId = eventData.target.closest(".deleteCart").getAttribute("id")

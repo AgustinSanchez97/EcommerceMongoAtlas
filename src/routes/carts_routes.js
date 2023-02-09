@@ -66,7 +66,7 @@ router.put("/:id", async (req,res) => {
         //await console.log( allProductsInCart.products.find(()=>{ req.body[0]}))
         
         //allProductsInCart.products.push(req.body)
-        const cart = await cartsDao.update(req.params.id, allProductsInCart)        
+        const cart = await cartsDao.update(req.params.id, allProductsInCart)
         res.json(cart)
         /*
         */
@@ -92,7 +92,38 @@ router.post("/:cid/product/:pid" ,(req,res) => {
 */
 //borrar producto especifico de carrito
 router.delete("/:cid/products/:pid" ,async (req,res) => {
+    
+    try 
+    {                
+        const allProductsInCart = await cartsDao.getById(req.params.cid)
+        
+        const productToDelete = await productsDao.getById(req.params.pid)
 
+        //console.log(allProductsInCart)
+        //console.log(productToDelete)
+
+
+        let productInCart = allProductsInCart.products.find(product => product._productId == req.params.pid)
+
+        let index = allProductsInCart.products.findIndex(product => product._productId == req.params.pid);
+
+        
+        if(productInCart == null) return
+        
+        allProductsInCart.products.splice(index,1)
+        console.log(allProductsInCart.products)
+        
+        
+        const cart = await cartsDao.update(req.params.cid, allProductsInCart)
+        res.json(cart)
+
+
+        //res.json(cart)
+    } 
+    catch (error) 
+    {
+        res.status(500).json({ error: error.message })
+    }
 })
 
 //borrar carrito especifico

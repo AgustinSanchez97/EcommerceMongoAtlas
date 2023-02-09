@@ -14,7 +14,7 @@
                 <td>Entire Cart #{{cart.id}} </td>
                 <td></td>
                 <td>                                  
-                    <button class="deleteCart btn btn-danger" id="{{this.id}}" data-id="{{@index}}">Delete All Card Products</button>
+                    <button class="btn btn-danger" id="deleteCart" data-id="{{cart.id}}">Delete All Card Products</button>
                 </td>
             </tr>
             {{#each productsData}}
@@ -24,8 +24,8 @@
 
                 <td>
                     <a href="/add/{{this._productId}}" class="btn btn-success">Edit</a>
-                    {{!-- <a href="/api/carts/deleteCart/{{this.id}}" class="btn btn-danger">Delete</a> --}}                                        
-                    <button class="deleteCart btn btn-danger" id="{{this.id}}" data-id="{{@index}}">Delete</button>
+                    {{!-- <a href="/api/carts/deleteCart/{{this.id}}" class="btn btn-danger">Delete</a> --}}
+                    <button class="deleteProductsFromCart btn btn-danger" id="{{this._productId}}" data-id="{{@index}}">Delete</button>
 
                 </td>
             </tr>
