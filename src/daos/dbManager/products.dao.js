@@ -9,30 +9,26 @@ class productDao{
     }
     async getAllByPages(sortMethod,page,limits,orderMethod)
     {
+        console.log(orderMethod)
         let options =
         {                        
             page:page,
-            limit:limits,
-            sort:{},
-        }
-
-        options.sort={price:1}
+            limit:limits,            
+        }        
         
         let filters = {}
-
+        //filters.category = "todos"
         if(sortMethod != null && sortMethod != "todos")
         {
             filters.category = sortMethod
         }
         
-        //console.log(result)
-        //let products = await productModel.find()
+        if(orderMethod == 1 || orderMethod == -1)
+        {
+            options.sort = {price:orderMethod}
+        }
+        
         let products = await productModel.paginate(productModel.find(filters),options)
-        
-        //let products = await productModel.find({description:"telefono"})
-        
-        //console.log(await productModel.find({description:"telefono"}))
-        //let products = await productModel.paginate({},{page:page, limit:limits})
         return products
     }
 
@@ -57,6 +53,5 @@ class productDao{
     }
 
 }
-//productDao.plugin(mongoosePaginate)
 
 export default new productDao()

@@ -42,7 +42,6 @@ router.post('/', async (req, res) =>
     {
         const product = await productsDao.create(req.body)
         res.redirect("/")
-        //res.json(product)
     }catch (error)
     {
         res.status(500).json({ error: error.message });
