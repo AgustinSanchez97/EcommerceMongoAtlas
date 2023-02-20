@@ -111,7 +111,8 @@ router.delete("/:cid/products/:pid" ,async (req,res) => {
         if(productInCart == null) return
         
         allProductsInCart.products.splice(index,1)
-        console.log(allProductsInCart.products)
+        
+        //console.log(allProductsInCart.products)
         
         
         const cart = await cartsDao.update(req.params.cid, allProductsInCart)

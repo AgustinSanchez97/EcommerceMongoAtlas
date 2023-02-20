@@ -9,7 +9,7 @@ class productDao{
     }
     async getAllByPages(sortMethod,page,limits,orderMethod)
     {
-        console.log(orderMethod)
+        //console.log(orderMethod)
         let options =
         {                        
             page:page,
