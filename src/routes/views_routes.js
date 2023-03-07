@@ -122,7 +122,7 @@ router.get('/carts/:id', async (req, res) =>
 })
 
 const isSession = (req,res,next)=>{
-    if(req.session.user) return res.redirect("/profile")
+    //if(req.session.user) return res.redirect("/profile")
 
     next()
 }

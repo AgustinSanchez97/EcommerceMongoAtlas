@@ -2,6 +2,10 @@ import { Router } from "express";
 import {userModel} from "../models/userModel.js";
 import { comparePassword, hashPassword } from "../utils.js";
 import passport from "passport";
+import cookieParser from "cookie-parser";
+
+import jwt from "jsonwebtoken"
+
 
 const router = Router()
 
@@ -24,7 +28,7 @@ router.post("/login",passport.authenticate("login", {failureRedirect:"/login"}) 
     }
     */
     if(!req.user) return res.status(404).json({message:"user not found"})
-
+    
     req.session.user = {
             first_name : req.user.first_name,
             last_name: req.user.last_name ,
@@ -33,9 +37,21 @@ router.post("/login",passport.authenticate("login", {failureRedirect:"/login"}) 
             role: req.user.role
     }
 
-    res.status(200).redirect("/")
+    const email = req.user.email
+    const password = req.user.password
+    
 
+    const token = jwt.sign({email,password}, "coderSecret",{expiresIn:"5m"})
+    res.cookie("token",token, {
+        maxAge: 50000,
+        httpOnly: true
+    })
+    res.json({token, message: "login success"})
+    
+    
 
+    //res.status(200)
+    //res.status(200).redirect("/login")
 })
 
 router.post("/register",passport.authenticate("register", {failureRedirect:"/"}), async (req,res)=>{
@@ -59,9 +75,9 @@ router.post("/register",passport.authenticate("register", {failureRedirect:"/"})
     */
 
     return res.status(201).redirect("/login")
-
-
 })
+
+
 
 router.get("/github", passport.authenticate("github"))
 
@@ -79,5 +95,9 @@ req.session.destroy()
 res.redirect("/login")
 })
 
+//CURRENT
+router.get("/current", passport.authenticate("jwt",{session: false}), async (req,res)=>{    
+    res.json({user:req.user})
+})
 
 export default router

@@ -4,10 +4,42 @@ import {userModel} from "../models/userModel.js";
 import { hashPassword,comparePassword } from "../utils.js";
 import GitHubStrategy from "passport-github2"
 
+import jwt, { ExtractJwt } from "passport-jwt"
+
+
+
+const jwtStrategy = jwt.Strategy
+
+const extractJWT = jwt.ExtractJwt
+
 const localStrategy= local.Strategy
 
-
 const initializePassport = () =>{
+
+    const cookieExtractor = (req) => {
+    let token = null
+    if (req && req.cookies) token = req.cookies["token"]
+    
+    return token
+}
+
+    passport.use("jwt",new jwtStrategy({
+        jwtFromRequest: extractJWT.fromExtractors([cookieExtractor]),
+        secretOrKey: "coderSecret"
+    },
+    async (jwt_payload, done) => {
+            try 
+                {
+                    done(null,jwt_payload)
+                } 
+            catch(error)
+                {
+                    done(error)
+                }
+            }
+        )
+    );
+
 
     passport.use(
         "register",
@@ -49,8 +81,8 @@ const initializePassport = () =>{
             },
             async (username,password,done)=>{    
                 try{
-                    const user = await userModel.findOne({email:username})        
-                    
+                    const user = await userModel.findOne({email:username})
+                    //console.log(user)
                     if(user == null) return done(null,false)
                     if(!comparePassword(user,password)) return done(null,false)
                     
@@ -98,11 +130,6 @@ const initializePassport = () =>{
     );
 };
 
-
-        
-
-            
-    
 
 
 passport.serializeUser((user,done) =>{
